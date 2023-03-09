@@ -20,6 +20,12 @@
                         History</span>
                 </a>
             </li>
+            <li class="nav-item mr-2">
+                <a href="/dataCount" class="bg-info  list-group-item list-group-item-action py-2 ripple"><i
+                        class="fas fa-lock fa-fw me-3"></i><span style="color: white">Data Count
+                    </span>
+                </a>
+            </li>
 
         </ul>
 

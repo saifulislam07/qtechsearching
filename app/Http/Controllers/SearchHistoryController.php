@@ -20,6 +20,28 @@ class SearchHistoryController extends Controller
         //
     }
 
+    public function getDataByKey($id)
+    {
+
+        $keys = explode(',', $id);
+        $data = SearchHistory::whereIn('keywords', $keys)->get();
+
+        // $data = DB::table('subcategories as sub_cat')->selectRaw('(Select image from categories where id = sub_cat.category_id) as cat_image,  (Select title from categories where id = sub_cat.category_id) as cat_title')->whereRaw('category_id IN (' . $id . ')')->get();
+
+        echo json_encode($data);
+    }
+    public function fetchDataByUserId($id)
+    {
+
+        $uid = explode(',', $id);
+        $data = SearchHistory::whereIn('user_id', $uid)->get();
+
+        // $data = DB::table('subcategories as sub_cat')->selectRaw('(Select image from categories where id = sub_cat.category_id) as cat_image,  (Select title from categories where id = sub_cat.category_id) as cat_title')->whereRaw('category_id IN (' . $id . ')')->get();
+
+        echo json_encode($data);
+    }
+
+
     public function searchhistory(Request $request)
     {
 
@@ -67,6 +89,23 @@ class SearchHistoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function dataCount()
+    {
+        $count = 0;
+        return view('search.dataCount', get_defined_vars());
+    }
+
+    public function getDataCount(Request $request)
+    {
+
+        $string = $request->word;
+        $substring = $request->looginFor;
+
+        $count = substr_count($string, $substring);
+        // return redirect()->back()->with(['string' => $string, 'substring' => $substring, 'count' => $count]);
+        // return redirect()->route('regions', ['id' => $string, 'capital' => $capital])->with('message', 'State saved correctly!');
+        return view('search.dataCount', get_defined_vars());
+    }
 
 
     public function getProductList($keys)

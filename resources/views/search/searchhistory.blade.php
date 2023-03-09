@@ -1,49 +1,6 @@
 @extends('app')
 
 @section('content')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            //Add CSRF token to headers
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $('input[type="checkbox"]').click(function() {
-                const val = $(this).val()
-                if ($(this).prop("checked") == true) {
-                    alert(val + ' Checked and sending data to server')
-                    $.ajax({
-                            type: "POST",
-                            url: "file", // Route
-                            data: {
-                                checkbox_val: val
-                            }
-                        })
-                        .done(function(msg) {
-                            alert("Data: " + msg);
-                        });
-                } else {
-                    alert($(this).val() + ' unchecked');
-                    $.ajax({
-                            type: "POST",
-                            url: "file",
-                            data: {
-                                checkbox_val: val
-                            }
-                        })
-                        .done(function(msg) {
-                            alert('Record removed');
-                        });
-                }
-            });
-        });
-    </script>
-
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 ">
@@ -67,15 +24,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $counter = 0; ?>
                                             @forelse ($countKeywords  as $x => $eachKey)
                                                 <tr>
-                                                    <td> <input type="checkbox"> {{ $x }}
+                                                    <td> <input {{ $counter == 0 ? '' : 'checked' }}
+                                                            attr-name="{{ $x }}" class="keys_checkbox"
+                                                            type="checkbox" id="{{ $x }}">
+                                                        {{ $x }}
                                                     </td>
                                                     <td>{{ $eachKey }}</td>
                                                 </tr>
                                             @empty
+
                                                 <h6 class="alert alert-danger">Nothing found</h6>
                                             @endforelse
+                                            <?php $counter++; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -90,9 +53,13 @@
 
                                         </thead>
                                         <tbody>
+                                            <?php $counterU = 0; ?>
                                             @forelse ($allUsers  as $x => $echuser)
                                                 <tr>
-                                                    <td> <input value="{{ $echuser->user_id }}" type="checkbox">
+                                                    <td> <input {{ $counterU == 0 ? '' : 'checked' }}
+                                                            value="{{ $echuser->user_id }}"
+                                                            attr-name="{{ $echuser->user_id }}" id="{{ $echuser->user_id }}"
+                                                            class="user_checkbox" type="checkbox">
                                                         {{ $echuser->name }}
                                                     </td>
 
@@ -100,6 +67,7 @@
                                             @empty
                                                 <h6 class="alert alert-danger">Nothing found</h6>
                                             @endforelse
+                                            <?php $counterU++; ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -159,7 +127,12 @@
                             </div>
                         </div>
                         <div class="col-md-8 float-left">
-                            <table class="table table-bordered">
+                            <div class="row causes_div">
+
+                            </div>
+
+
+                            {{-- <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th width="15%">Time</th>
@@ -177,13 +150,15 @@
                                     @endforelse
 
                                 </tbody>
-                            </table>
+                            </table> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="{{ asset('assets/js/jquery-3.4.0.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/filter.js') }}"></script>
     <script></script>
 @endsection

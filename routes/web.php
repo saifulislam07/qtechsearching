@@ -32,3 +32,8 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 
 Route::post('ajaxdata_postdata', [SearchHistoryController::class, 'storesearchdata'])->name('ajaxdata_postdata');
 Route::get('searchhistory', [SearchHistoryController::class, 'searchhistory'])->name('searchhistory');
+Route::get('getDataByKey/{id}', [SearchHistoryController::class, 'getDataByKey'])->name('getDataByKey');
+Route::get('fetchDataByUserId/{id}', [SearchHistoryController::class, 'fetchDataByUserId'])->name('fetchDataByUserId');
+
+Route::get('dataCount', [SearchHistoryController::class, 'dataCount'])->name('dataCount');
+Route::post('getDataCount', [SearchHistoryController::class, 'getDataCount'])->name('getDataCount');
