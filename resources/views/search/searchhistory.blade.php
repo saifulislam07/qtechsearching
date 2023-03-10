@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12 ">
@@ -27,7 +28,8 @@
                                             <?php $counter = 0; ?>
                                             @forelse ($countKeywords  as $x => $eachKey)
                                                 <tr>
-                                                    <td> <input {{ $counter == 0 ? '' : 'checked' }}
+                                                    <td>
+                                                        <input {{ $counter == 0 ? '' : 'checked' }}
                                                             attr-name="{{ $x }}" class="keys_checkbox"
                                                             type="checkbox" id="{{ $x }}">
                                                         {{ $x }}
@@ -35,7 +37,6 @@
                                                     <td>{{ $eachKey }}</td>
                                                 </tr>
                                             @empty
-
                                                 <h6 class="alert alert-danger">Nothing found</h6>
                                             @endforelse
                                             <?php $counter++; ?>
@@ -83,17 +84,23 @@
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input value="1" type="checkbox"> Yesterday
+                                                    <input value="1" id="1" attr-name="yesterday"
+                                                        class="date_check" type="checkbox">
+                                                    Yesterday
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input value="2" type="checkbox"> Last Week
+                                                    <input value="2" id="2" attr-name="week" class="date_check"
+                                                        type="checkbox">
+                                                    Last Week
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input value="3" type="checkbox"> Last Month
+                                                    <input value="3" id="3" attr-name="month"
+                                                        class="date_check" type="checkbox">
+                                                    Last Month
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -130,27 +137,6 @@
                             <div class="row causes_div">
 
                             </div>
-
-
-                            {{-- <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th width="15%">Time</th>
-                                        <th>keywords</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($searchHistoryData as $eachKey)
-                                        <tr>
-                                            <td>{{ date('h:i A', strtotime($eachKey->created_at)) }}</td>
-                                            <td>{{ $eachKey->keywords }}</td>
-                                        </tr>
-                                    @empty
-                                        <h6 class="alert alert-danger">Nothing found</h6>
-                                    @endforelse
-
-                                </tbody>
-                            </table> --}}
                         </div>
                     </div>
                 </div>

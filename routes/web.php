@@ -29,10 +29,11 @@ Route::get('registration', [CustomAuthController::class, 'registration'])->name(
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
-
+Route::get('getAllData', [SearchHistoryController::class, 'getAllData'])->name('getAllData');
 Route::post('ajaxdata_postdata', [SearchHistoryController::class, 'storesearchdata'])->name('ajaxdata_postdata');
 Route::get('searchhistory', [SearchHistoryController::class, 'searchhistory'])->name('searchhistory');
 Route::get('getDataByKey/{id}', [SearchHistoryController::class, 'getDataByKey'])->name('getDataByKey');
+Route::get('getDataByDate/{id}', [SearchHistoryController::class, 'getDataByDate'])->name('getDataByDate');
 Route::get('fetchDataByUserId/{id}', [SearchHistoryController::class, 'fetchDataByUserId'])->name('fetchDataByUserId');
 
 Route::get('dataCount', [SearchHistoryController::class, 'dataCount'])->name('dataCount');

@@ -46,47 +46,11 @@
                     _token: $("#csrf").val(),
                     name: searchdata,
                 },
-                // success: function(store) {
-                //     location.href = store;
-                // },
-                // error: function() {}
+
                 success: function(respo) {
                     $('.mydata').html(respo);
                 }
             });
         }
-
-
-        // $(document).ready(function() {
-
-        //     $('#ajax').on('keypress', function(e) {
-        //         if (e.which == 13) {
-        //             var searchdata = $('.searchdata').val();
-
-        //             $.ajax({
-        //                 url: "/ajaxdata_postdata",
-        //                 type: "POST",
-        //                 data: {
-        //                     _token: $("#csrf").val(),
-        //                     name: searchdata,
-        //                 },
-        //                 success: function(store) {
-        //                     location.href = store;
-        //                 },
-        //                 error: function() {}
-        //                 // success: function(respo) {
-        //                 //     alert(respo);
-        //                 //     // var dataResult = JSON.parse(dataResult);
-        //                 //     // if (dataResult.statusCode == 200) {
-        //                 //     //     window.location = "/userData";
-        //                 //     // } else if (dataResult.statusCode == 201) {
-        //                 //     //     alert("Error occured !");
-        //                 //     // }
-
-        //                 // }
-        //             });
-        //         }
-        //     });
-        // });
     </script>
 @endsection

@@ -9,6 +9,7 @@ use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class SearchHistoryController extends Controller
 {
@@ -20,23 +21,21 @@ class SearchHistoryController extends Controller
         //
     }
 
-    public function getDataByKey($id)
+
+
+    public function getAllData()
     {
-
-        $keys = explode(',', $id);
-        $data = SearchHistory::whereIn('keywords', $keys)->get();
-
-        // $data = DB::table('subcategories as sub_cat')->selectRaw('(Select image from categories where id = sub_cat.category_id) as cat_image,  (Select title from categories where id = sub_cat.category_id) as cat_title')->whereRaw('category_id IN (' . $id . ')')->get();
-
+        $data = SearchHistory::all();
         echo json_encode($data);
     }
+
     public function fetchDataByUserId($id)
     {
 
         $uid = explode(',', $id);
         $data = SearchHistory::whereIn('user_id', $uid)->get();
 
-        // $data = DB::table('subcategories as sub_cat')->selectRaw('(Select image from categories where id = sub_cat.category_id) as cat_image,  (Select title from categories where id = sub_cat.category_id) as cat_title')->whereRaw('category_id IN (' . $id . ')')->get();
+
 
         echo json_encode($data);
     }
@@ -102,8 +101,6 @@ class SearchHistoryController extends Controller
         $substring = $request->looginFor;
 
         $count = substr_count($string, $substring);
-        // return redirect()->back()->with(['string' => $string, 'substring' => $substring, 'count' => $count]);
-        // return redirect()->route('regions', ['id' => $string, 'capital' => $capital])->with('message', 'State saved correctly!');
         return view('search.dataCount', get_defined_vars());
     }
 

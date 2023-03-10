@@ -16,7 +16,6 @@
                                 {{ session('success') }}
                             </div>
                         @endif
-
                         You are Logged In
                     </div>
                 </div>
